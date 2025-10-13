@@ -31,7 +31,7 @@ const BarbershopItem = ({ barbershop }: BarbershopItemProps) => {
           />
 
           <Badge
-            className="absolute left-2 top-2 space-x-1"
+            className="absolute left-2 top-2 space-x-1 rounded-full px-3 py-1"
             variant="secondary"
           >
             <StarIcon size={12} className="fill-primary text-primary" />
