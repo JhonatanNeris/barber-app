@@ -29,6 +29,59 @@ export default async function Home() {
           </Button>
         </div>
 
+        {/* BUSCA RÁPIDA */}
+        <div className="mt-6 flex gap-3 overflow-x-scroll [&::-webkit-scrollbar]:hidden">
+          <Button className="gap-2" variant="secondary">
+            <Image
+              src="/cabelo-icon.svg"
+              alt="Ícone de tesoura"
+              width={16}
+              height={16}
+            />
+            Cabelo
+          </Button>
+          <Button className="gap-2" variant="secondary">
+            <Image src="/barba-icon.svg" alt="Barba" width={16} height={16} />
+            Barba
+          </Button>
+          <Button className="gap-2" variant="secondary">
+            <Image
+              src="/acabamento-icon.svg"
+              alt="Acabamento"
+              width={16}
+              height={16}
+            />
+            Acabamento
+          </Button>
+          <Button className="gap-2" variant="secondary">
+            <Image
+              src="/acabamento-icon.svg"
+              alt="Acabamento"
+              width={16}
+              height={16}
+            />
+            Acabamento
+          </Button>
+          <Button className="gap-2" variant="secondary">
+            <Image
+              src="/acabamento-icon.svg"
+              alt="Acabamento"
+              width={16}
+              height={16}
+            />
+            Acabamento
+          </Button>
+          <Button className="gap-2" variant="secondary">
+            <Image
+              src="/acabamento-icon.svg"
+              alt="Acabamento"
+              width={16}
+              height={16}
+            />
+            Acabamento
+          </Button>
+        </div>
+
         <div className="relative mt-6 h-[150px] w-full">
           <Image
             src="/banner_01.png"
@@ -75,7 +128,18 @@ export default async function Home() {
           Recomendados
         </h2>
 
-        <div className="flex gap-4 overflow-auto">
+        <div className="flex gap-4 overflow-auto [&::-webkit-scrollbar]:hidden">
+          {barbershops.map((item) => (
+            <BarbershopItem key={item.id} barbershop={item} />
+          ))}
+        </div>
+
+        {/* Populares */}
+        <h2 className="mb-3 mt-6 text-sm font-bold uppercase text-[#838896]">
+          Populares
+        </h2>
+
+        <div className="flex gap-4 overflow-auto [&::-webkit-scrollbar]:hidden">
           {barbershops.map((item) => (
             <BarbershopItem key={item.id} barbershop={item} />
           ))}
