@@ -1,10 +1,19 @@
 import { Input } from "@/components/ui/input"
 import Header from "./_components/header"
 import { Button } from "@/components/ui/button"
+import { Badge } from "@/components/ui/badge"
 import { SearchIcon } from "lucide-react"
 import Image from "next/image"
+import { Card, CardContent } from "@/components/ui/card"
 
-export default function Home() {
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import db from "@/lib/prisma"
+import BarbershopItem from "./_components/barbershop-item"
+
+export default async function Home() {
+  const barbershops = await db.barbershop.findMany({})
+  console.log(barbershops)
+
   return (
     <div>
       {/* Header */}
@@ -27,6 +36,49 @@ export default function Home() {
             fill
             className="rounded-lg object-cover"
           />
+        </div>
+
+        {/* Agendamento */}
+        <h2 className="mb-3 mt-6 text-sm font-bold uppercase text-[#838896]">
+          Agendamentos
+        </h2>
+
+        <Card>
+          <CardContent className="flex justify-between p-0">
+            {/* ESQUERDA */}
+            <div className="flex flex-col gap-2 py-5 pl-5">
+              <Badge className="w-fit rounded-full bg-[#221C3D] font-bold text-[#8162FF]">
+                Confirmado
+              </Badge>
+              <h3 className="text-lg font-bold">Corte de cabelo</h3>
+
+              <div className="flex items-center gap-2">
+                <Avatar className="h-8 w-8">
+                  <AvatarImage src="https://github.com/shadcn.png" />
+                  <AvatarFallback>CN</AvatarFallback>
+                </Avatar>
+                <p className="text-sm font-[400]">Barbearia do Chiquinho</p>
+              </div>
+            </div>
+
+            {/* DIREITA */}
+            <div className="flex flex-col items-center justify-center gap-1 border-l-2 border-solid px-5">
+              <p className="text-sm font-[400]">Outubro</p>
+              <p className="text-2xl font-[400]">13</p>
+              <p className="text-sm font-[400]">12:00</p>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Recomendados */}
+        <h2 className="mb-3 mt-6 text-sm font-bold uppercase text-[#838896]">
+          Recomendados
+        </h2>
+
+        <div className="flex gap-4 overflow-auto">
+          {barbershops.map((item) => (
+            <BarbershopItem key={item.id} barbershop={item} />
+          ))}
         </div>
       </div>
     </div>
