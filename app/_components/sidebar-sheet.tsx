@@ -12,6 +12,15 @@ import { quickSearchOptions } from "../_constants/search"
 import Link from "next/link"
 import Image from "next/image"
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog"
+import { Avatar, AvatarImage } from "@/components/ui/avatar"
+
+const data = {
+  user: {
+    name: "Jhonatan",
+    email: "jhonatan@gmail.com",
+    image: "https://github.com/shadcn.png",
+  },
+}
 
 const SidebarSheet = () => {
   return (
@@ -21,20 +30,37 @@ const SidebarSheet = () => {
       </SheetHeader>
 
       <div className="flex items-center justify-between gap-3 border-b border-solid py-5">
-        <h2 className="font-bold">Olá, faça seu login!</h2>
-        <Dialog>
-          <DialogTrigger asChild>
-            <Button size="icon">
-              <LogInIcon />
-            </Button>
-          </DialogTrigger>
-          <DialogContent className="w-[90%]"></DialogContent>
-        </Dialog>
+        {data?.user ? (
+          <div className="flex items-center gap-2">
+            <Avatar className="border-spacing-2 border-solid">
+              <AvatarImage src={data?.user?.image ?? ""} />
+            </Avatar>
+
+            <div>
+              <p className="font-bold">{data.user.name}</p>
+              <p className="text-xs">{data.user.email}</p>
+            </div>
+          </div>
+        ) : (
+          <>
+            <h2 className="font-bold">Olá, faça seu login!</h2>
+            <Dialog>
+              <DialogTrigger asChild>
+                <Button size="icon">
+                  <LogInIcon />
+                </Button>
+              </DialogTrigger>
+              <DialogContent className="w-[90%]">
+                {/* <SignInDialog /> */}
+              </DialogContent>
+            </Dialog>
+          </>
+        )}
       </div>
 
       <div className="flex flex-col gap-2 border-b border-solid py-5">
         <SheetClose asChild>
-          <Button className="justify-start gap-2" variant="ghost" asChild>
+          <Button className="justify-start gap-2" variant="default" asChild>
             <Link href="/">
               <HomeIcon size={18} />
               Início
