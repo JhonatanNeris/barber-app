@@ -1,4 +1,4 @@
-// import { signIn } from "next-auth/react"
+import { signIn } from "next-auth/react"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import {
@@ -8,8 +8,8 @@ import {
 } from "@/components/ui/dialog"
 
 const SignInDialog = () => {
-  //   const handleLoginWithGoogleClick = () => signIn("google")
-  const handleLoginWithGoogleClick = () => console.log("google")
+  const handleLoginWithGoogleClick = () => signIn("google")
+  //   const handleLoginWithGoogleClick = () => console.log("google")
 
   return (
     <>
