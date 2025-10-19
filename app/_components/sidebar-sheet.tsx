@@ -13,13 +13,14 @@ import Link from "next/link"
 import Image from "next/image"
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog"
 import { Avatar, AvatarImage } from "@/components/ui/avatar"
+import SignInDialog from "./sign-in-dialog"
 
 const data = {
-  user: {
-    name: "Jhonatan",
-    email: "jhonatan@gmail.com",
-    image: "https://github.com/shadcn.png",
-  },
+  // user: {
+  //   name: "Jhonatan",
+  //   email: "jhonatan@gmail.com",
+  //   image: "https://github.com/shadcn.png",
+  // },
 }
 
 const SidebarSheet = () => {
@@ -50,8 +51,8 @@ const SidebarSheet = () => {
                   <LogInIcon />
                 </Button>
               </DialogTrigger>
-              <DialogContent className="w-[90%]">
-                {/* <SignInDialog /> */}
+              <DialogContent className="flex w-[90%] flex-col gap-5 rounded-[10px]">
+                <SignInDialog />
               </DialogContent>
             </Dialog>
           </>
