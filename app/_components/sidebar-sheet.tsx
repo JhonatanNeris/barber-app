@@ -14,16 +14,12 @@ import Image from "next/image"
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog"
 import { Avatar, AvatarImage } from "@/components/ui/avatar"
 import SignInDialog from "./sign-in-dialog"
-
-const data = {
-  // user: {
-  //   name: "Jhonatan",
-  //   email: "jhonatan@gmail.com",
-  //   image: "https://github.com/shadcn.png",
-  // },
-}
+import { signOut, useSession } from "next-auth/react"
 
 const SidebarSheet = () => {
+  const { data } = useSession()
+  const handleLogoutClick = () => signOut()
+
   return (
     <SheetContent className="overflow-y-auto">
       <SheetHeader>
@@ -95,7 +91,11 @@ const SidebarSheet = () => {
       </div>
 
       <div className="flex flex-col gap-2 py-5">
-        <Button variant="ghost" className="justify-start gap-2">
+        <Button
+          variant="ghost"
+          className="justify-start gap-2"
+          onClick={handleLogoutClick}
+        >
           <LogOutIcon size={18} />
           Sair da conta
         </Button>
