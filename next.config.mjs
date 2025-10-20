@@ -7,6 +7,11 @@ const nextConfig = {
                 hostname: "utfs.io",
                 pathname: "/**", // ou mais específico: "/viniciosneves/code-connect-assets/**"
             },
+            {
+                protocol: "https",
+                hostname: "scc10.com.br",
+                pathname: "/**", // ou mais específico: "/viniciosneves/code-connect-assets/**"
+            },
         ],
     },
 };

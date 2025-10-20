@@ -8,6 +8,7 @@ import BarbershopItem from "./_components/barbershop-item"
 import { quickSearchOptions } from "./_constants/search"
 import BookingItem from "./_components/booking-item"
 import Search from "./_components/search"
+import Link from "next/link"
 
 export default async function Home() {
   const barbershops = await db.barbershop.findMany({})
@@ -17,7 +18,9 @@ export default async function Home() {
     <div>
       {/* Header */}
       <Header />
+
       <div className="p-5">
+        {/* SAUDAÇÃO */}
         <h2 className="text-xl font-bold">Olá, Jhonatan!</h2>
         <p>Segunda-feira, 05 de agosto</p>
 
@@ -29,14 +32,21 @@ export default async function Home() {
         {/* BUSCA RÁPIDA */}
         <div className="mt-6 flex gap-3 overflow-x-scroll [&::-webkit-scrollbar]:hidden">
           {quickSearchOptions.map((option) => (
-            <Button key={option.label} className="gap-2" variant="secondary">
-              <Image
-                src={option.iconUrl}
-                alt={option.label}
-                width={16}
-                height={16}
-              />
-              {option.label}
+            <Button
+              className="gap-2"
+              variant="secondary"
+              key={option.label}
+              asChild
+            >
+              <Link href={`/barbershops?service=${option.label}`}>
+                <Image
+                  src={option.iconUrl}
+                  width={16}
+                  height={16}
+                  alt={option.label}
+                />
+                {option.label}
+              </Link>
             </Button>
           ))}
         </div>
