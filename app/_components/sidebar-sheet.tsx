@@ -30,7 +30,11 @@ const SidebarSheet = () => {
         {data?.user ? (
           <div className="flex items-center gap-2">
             <Avatar className="border-spacing-2 border-solid">
-              <AvatarImage src={data?.user?.image ?? ""} />
+              <AvatarImage
+                src={data?.user?.image ?? ""}
+                width={18}
+                height={18}
+              />
             </Avatar>
 
             <div>
