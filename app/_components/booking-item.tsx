@@ -2,7 +2,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"
 import { Prisma } from "../generated/prisma"
-import { format } from "date-fns"
+import { format, isFuture } from "date-fns"
 import { ptBR } from "date-fns/locale"
 
 interface BookingItemProps {
@@ -18,13 +18,18 @@ interface BookingItemProps {
 }
 
 const BookingItem = ({ booking }: BookingItemProps) => {
+  const isConfirmed = isFuture(booking.date)
+
   return (
     <Card className="w-full min-w-[90%]">
       <CardContent className="flex justify-between p-0">
         {/* ESQUERDA */}
         <div className="flex flex-col gap-2 py-5 pl-5">
-          <Badge className="w-fit rounded-full bg-[#221C3D] font-bold text-[#8162FF]">
-            Confirmado
+          <Badge
+            className="w-fit rounded-full font-bold"
+            variant={isConfirmed ? "default" : "secondary"}
+          >
+            {isConfirmed ? "Confirmado" : "Finalizado"}
           </Badge>
           <h3 className="text-lg font-bold">{booking.service.name}</h3>
 
