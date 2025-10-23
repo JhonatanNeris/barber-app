@@ -63,6 +63,7 @@ const getTimeList = ({ bookings, selectedDay }: GetTimeListProps) => {
     const minutes = Number(time.split(":")[1])
 
     const timeIsOnThePast = isPast(set(new Date(), { hours: hour, minutes }))
+
     if (timeIsOnThePast && isToday(selectedDay)) {
       return false
     }
