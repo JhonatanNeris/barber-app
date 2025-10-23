@@ -9,10 +9,13 @@ import { quickSearchOptions } from "./_constants/search"
 import BookingItem from "./_components/booking-item"
 import Search from "./_components/search"
 import Link from "next/link"
+import { getConfirmedBookings } from "./_data/get-confirmed-bookings"
 
 export default async function Home() {
   const barbershops = await db.barbershop.findMany({})
   console.log(barbershops)
+
+  const confirmedBookings = await getConfirmedBookings()
 
   return (
     <div>
@@ -61,10 +64,23 @@ export default async function Home() {
         </div>
 
         {/* Agendamento */}
-        <h2 className="mb-3 mt-6 text-sm font-bold uppercase text-[#838896]">
-          Agendamentos
-        </h2>
-        <BookingItem />
+        {confirmedBookings.length > 0 && (
+          <>
+            <h2 className="mb-3 mt-6 text-sm font-bold uppercase text-[#838896]">
+              Agendamentos
+            </h2>
+
+            {/* AGENDAMENTO */}
+            <div className="flex gap-3 overflow-x-auto [&::-webkit-scrollbar]:hidden">
+              {confirmedBookings.map((booking) => (
+                <BookingItem
+                  key={booking.id}
+                  booking={JSON.parse(JSON.stringify(booking))}
+                />
+              ))}
+            </div>
+          </>
+        )}
 
         {/* Recomendados */}
         <h2 className="mb-3 mt-6 text-sm font-bold uppercase text-[#838896]">
