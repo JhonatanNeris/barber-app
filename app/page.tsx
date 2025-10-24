@@ -10,8 +10,13 @@ import BookingItem from "./_components/booking-item"
 import Search from "./_components/search"
 import Link from "next/link"
 import { getConfirmedBookings } from "./_data/get-confirmed-bookings"
+import { getServerSession } from "next-auth"
+import { authOptions } from "@/lib/auth"
+import { format } from "date-fns"
+import { ptBR } from "date-fns/locale"
 
 export default async function Home() {
+  const session = await getServerSession(authOptions)
   const barbershops = await db.barbershop.findMany({})
   console.log(barbershops)
 
@@ -24,8 +29,18 @@ export default async function Home() {
 
       <div className="p-5">
         {/* SAUDAÇÃO */}
-        <h2 className="text-xl font-bold">Olá, Jhonatan!</h2>
-        <p>Segunda-feira, 05 de agosto</p>
+        <h2 className="text-xl font-bold">
+          Olá, {session?.user ? session.user.name : "bem vindo"}!
+        </h2>
+        <p>
+          <span className="capitalize">
+            {format(new Date(), "EEEE, dd", { locale: ptBR })}
+          </span>
+          <span>&nbsp;de&nbsp;</span>
+          <span className="capitalize">
+            {format(new Date(), "MMMM", { locale: ptBR })}
+          </span>
+        </p>
 
         {/* BUSCA */}
         <div className="mt-6">
