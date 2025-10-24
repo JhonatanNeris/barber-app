@@ -30,6 +30,8 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
+import { deleteBooking } from "../_actions/delete-booking"
+import { toast } from "sonner"
 // import { Prisma } from "@prisma/client"
 
 interface BookingItemProps {
@@ -53,6 +55,17 @@ const BookingItem = ({ booking }: BookingItemProps) => {
 
   const isConfirmed = isFuture(booking.date)
 
+  const handleCancelBooking = async () => {
+    try {
+      await deleteBooking(booking.id)
+      setIsSheetOpen(false)
+      toast.success("Reserva cancelada com sucesso!")
+    } catch (error) {
+      console.error(error)
+      toast.error("Erro ao cancelar reserva. Tente novamente.")
+    }
+  }
+
   const handleSheetOpenChange = (isOpen: boolean) => {
     setIsSheetOpen(isOpen)
   }
@@ -63,7 +76,7 @@ const BookingItem = ({ booking }: BookingItemProps) => {
         <Card className="min-w-[90%]">
           <CardContent className="flex justify-between p-0">
             {/* ESQUERDA */}
-            <div className="flex flex-col gap-2 py-5 pl-5">
+            <div className="flex flex-col gap-2 py-5 pl-5 text-left">
               <Badge
                 className="w-fit"
                 variant={isConfirmed ? "default" : "secondary"}
@@ -173,7 +186,7 @@ const BookingItem = ({ booking }: BookingItemProps) => {
                     <DialogClose className="w-full">
                       <Button
                         variant="destructive"
-                        // onClick={handleCancelBooking}
+                        onClick={handleCancelBooking}
                         className="w-full"
                       >
                         Confirmar
