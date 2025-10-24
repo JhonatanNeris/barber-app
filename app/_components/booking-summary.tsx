@@ -1,8 +1,8 @@
 import { Card, CardContent } from "@/components/ui/card"
+import { Barbershop, BarbershopService } from "@prisma/client"
 import { format } from "date-fns"
 import { ptBR } from "date-fns/locale"
 import React from "react"
-import { Barbershop, BarbershopService } from "../generated/prisma"
 
 interface BookingSummaryProps {
   service: Pick<BarbershopService, "name" | "price">

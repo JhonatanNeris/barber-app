@@ -1,7 +1,6 @@
 "use client"
 
 import { Card, CardContent } from "@/components/ui/card"
-import { Barbershop, BarbershopService, Booking } from "../generated/prisma"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import {
@@ -23,6 +22,7 @@ import { useSession } from "next-auth/react"
 import { Dialog, DialogContent } from "@/components/ui/dialog"
 import SignInDialog from "./sign-in-dialog"
 import BookingSummary from "./booking-summary"
+import { Barbershop, BarbershopService, Booking } from "@prisma/client"
 
 interface ServiceItemProps {
   service: BarbershopService
